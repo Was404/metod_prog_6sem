@@ -10,10 +10,11 @@
 затем – 10, затем – 11. Внутри одного класса порядок вывода фамилий должен быть таким же, как на входе. 
 '''
 #BUG
+#WasFixed?
 
-num =9
+num = 9
 ls = []
-for i in range(50):
+for i in range(6):
     c = input()
     ls.append(c)
 while num < 12:

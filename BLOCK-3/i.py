@@ -1,29 +1,31 @@
-'''
-Входные данные
-Программа получает на вход целое число S — вместимость рюкзака, не превосходящее 10000 и количество слитков N, не превосходящее 300. 
-Далее следует N целых неотрицательных чисел, не превосходящих 100000 — веса слитков.
+def main():
+    # Сокращаем время ввода данных.
+    s, n = map(int, input().split())
 
-Выходные данные
-Программа должна вывести единственное целое число — максимально возможных вес золота, который поместится в данный рюкзак.
+    # Первый индекс - количество рассмотренных предметов, второй - вес.
+    # Предметов меньше (максимум 300), а весов больше (до 10000),
+    # поэтому предметы на первом месте (цикл на меньше итераций).
+    dp = [[False] * (s + 1) for _ in range(n + 1)]
 
-'''
+    dp[0][0] = True
 
-S, N = map(int, input().split()) # N - количество слитков S - предел рюкзака
-A = [int(i) for i in input().split()]
+    weights = list(map(int, input().split()))
+    for i in range(1, n + 1):
+        w = weights[i - 1]
+        for j in range(s + 1):
+            if dp[i - 1][j]:
+                # Если не брать предмет с номером i.
+                dp[i][j] = True
+            # Если взять предмет с номером i (не превышая вместимость рюкзака).
+            if j + w <= s:
+                dp[i][j + w] = True
 
-backpack = list()
+        # Найти максимальный полученный вес.
+    for i in range(s, -1, -1):
+        if dp[n][i]:
+            print(i)
+        break
 
-for i in range(len(A)):
-    if A[i] < S:
-        backpack.append(A[i])
-min = S
-#print(backpack)
-for i in range(len(backpack)):
-    if backpack[i] < min:
-        min = backpack[i]
-        #print(min)
 
-for i in range(N):
-    if (min + backpack[i]) < S and min != backpack[i]:
-        otvet = min + backpack[i]
-print(otvet)
+if __name__ == "__main__":
+    main()

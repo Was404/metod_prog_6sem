@@ -1,54 +1,27 @@
-'''
-Входные данные
+def foo(s, d=0):
+    global s_set
+    if d == 6:
+        s_list = list(s)
+        s_list[0], s_list[3] = s_list[3], s_list[0]
+        s_set.add("".join(s_list))
+        s_list[0], s_list[3] = s_list[3], s_list[0]
+        return
 
-На вход программы поступает  одна строка, которая представляет собой корректный автомобильный номер.
+    for i in range(d, 3 if d < 3 else 6):
+        s_list = list(s)
+        s_list[d], s_list[i] = s_list[i], s_list[d]
+        foo("".join(s_list), d + 1)
+        s_list[d], s_list[i] = s_list[i], s_list[d]
 
-Выходные данные
 
-В первой строке  выведите число k – количество номеров, которые могут получиться из заданного перестановкой букв и/или цифр.
-В последующих k строках выведите все такие номера в произвольном порядке.
-'''
-# import array as arr
-import itertools
-# k = int(input())
-list123 = []
-listABC = []
-nomerok = input()
-n = 1
-chunks = [nomerok[i:n+i] for i in range(0, len(nomerok), n)]
-chunks = list(chunks)
-for i in range(6):
-    try:
-        chunks[i] = int(chunks[i])
-        list123.append(chunks[i])
-    except:
-        listABC.append(chunks[i])
+if __name__ == "__main__":
+    s = input()
+    s_set = set()
 
-#print(nomerok, list123, listABC)
-list123 = list(map(str, list123)) # из цыфр в строки
-#делаем комбинации itertools
-comb_list123 = itertools.permutations(list123)
-comb_listABC = itertools.permutations(listABC)
-# массивы
-arr_comb_listABC = []
-arr_comb_list123 = []
+s_list = list(s)
+s_list[0], s_list[3] = s_list[3], s_list[0]
+foo("".join(s_list))
 
-num = ''
-list_num = []
-
-for i in comb_listABC:
-    arr_comb_listABC.append([i[0], i[1], i[2]])
-
-for i in comb_list123:
-    arr_comb_list123.append([i[0], i[1], i[2]])
-
-for i in arr_comb_listABC:
-    for j in arr_comb_list123:
-        num += i[0] + j[0] + j[1] + j[2] + i[1] + i[2]
-        list_num.append(num)
-        num = ''
-list_num = list(set(list_num))
-print(len(list_num))
-for i in range(len(list_num)):
-    print(list_num[i])
-
+print(len(s_set))
+for val in s_set:
+    print(val)

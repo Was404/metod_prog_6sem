@@ -39,10 +39,7 @@ def check_skobok(stroka):
         print('no')                                                                    
 
 #if __name__ == "main":
-stroka = ["(", ")", "[", "]", "{", "}"]
-#stroka.append(input()) 
-#i = 0
-#while i <= 100000:
-#    i += 1    
-#    stroka.append(input())
+#stroka = ["(", ")", "[", "]", "{", "}"]
+stroka = input()
+stroka.split()
 check_skobok(stroka)

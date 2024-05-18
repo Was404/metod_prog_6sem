@@ -8,7 +8,7 @@ def metod1(list_strok):
     while i < len(list_strok): #BUG
         if list_strok[i][0] == '-':
             list_strok.pop(i)
-        elif list_strok[i][0] == '':
+        elif list_strok[i][0] == '*':
             list_strok.insert(len(list_strok)//2, list_strok.pop(i))
         elif list_strok[i][0] == '+':
             list_strok.append(list_strok.pop(i))
